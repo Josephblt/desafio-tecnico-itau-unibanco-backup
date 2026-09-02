@@ -2,9 +2,8 @@
 set -euo pipefail
 
 ENDPOINT_URL="${DYNAMODB_ENDPOINT_URL:-http://dynamodb:8000}"
-TABLE_NAME="${GREETING_TABLE_NAME:-GreetingMessages}"
+TABLE_NAME="${BALANCE_TABLE_NAME:-AccountBalances}"
 REGION="${AWS_DEFAULT_REGION:-us-east-1}"
-SEED_FILE="/dynamodb-seed/greeting-messages.json"
 
 echo "Waiting for DynamoDB Local at ${ENDPOINT_URL}..."
 until aws dynamodb list-tables --endpoint-url "${ENDPOINT_URL}" --region "${REGION}" >/dev/null 2>&1; do
@@ -31,12 +30,6 @@ else
   echo "Table '${TABLE_NAME}' created."
 fi
 
-echo "Seeding greeting messages from ${SEED_FILE}..."
-aws dynamodb batch-write-item \
-  --request-items "file://${SEED_FILE}" \
-  --endpoint-url "${ENDPOINT_URL}" \
-  --region "${REGION}" >/dev/null
-
 COUNT=$(aws dynamodb scan \
   --table-name "${TABLE_NAME}" \
   --endpoint-url "${ENDPOINT_URL}" \
@@ -45,4 +38,4 @@ COUNT=$(aws dynamodb scan \
   --query 'Count' \
   --output text)
 
-echo "Seed complete. '${TABLE_NAME}' now has ${COUNT} item(s)."
+echo "Table '${TABLE_NAME}' is ready with ${COUNT} item(s)."

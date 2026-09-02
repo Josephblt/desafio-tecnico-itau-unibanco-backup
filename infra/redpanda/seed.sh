@@ -2,8 +2,8 @@
 set -euo pipefail
 
 BROKERS="${REDPANDA_BROKERS:-redpanda:9092}"
-TOPIC_NAME="${GREETING_TEMPLATES_TOPIC:-greeting-templates}"
-SEED_FILE="/redpanda-seed/greeting-templates-seed.jsonl"
+TOPIC_NAME="${FINANCIAL_TRANSACTIONS_TOPIC:-transacoes-financeiras-processadas}"
+SEED_FILE="/redpanda-seed/transactions-seed.jsonl"
 
 echo "Waiting for Redpanda broker at ${BROKERS}..."
 until rpk cluster info --brokers "${BROKERS}" >/dev/null 2>&1; do

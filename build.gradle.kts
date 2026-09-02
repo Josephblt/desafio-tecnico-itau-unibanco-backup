@@ -8,7 +8,7 @@ plugins {
 
 group = "br.com.itau"
 version = "0.0.1-SNAPSHOT"
-description = "itau-code-challange-starter-kit"
+description = "API de consulta de saldo para o desafio tecnico Itau Unibanco"
 
 java {
 	toolchain {

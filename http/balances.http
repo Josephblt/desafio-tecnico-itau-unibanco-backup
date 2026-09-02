@@ -1,0 +1,7 @@
+### Get an account balance
+GET {{host}}/balances/5b19c8b6-0cc4-4c72-a989-0c2ee15fa975
+Accept: application/json
+
+### Invalid account id should return 400
+GET {{host}}/balances/not-a-uuid
+Accept: application/json
